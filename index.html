@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + OpenGlobus</title>
+    <style>
+#globus {
+    width: 100vw;
+    height: 100vh;
+}
+#globus .canvas3d {
+    width: 100%;
+    height: 100%;
+	display: block;
+	opacity: 0;
+    transition: opacity 150ms ease 0s;
+}
+	</style>
+  </head>
+  <body>
+    <div id="globus"></div>
+    <script type="module">
+
+        'use strict';
+
+		import './css/og.css'
+		import {
+			Globe,
+			XYZ,
+			GeoTiff
+		} from './src';
+
+		const osm = new XYZ("OpenStreetMap", {
+			isBaseLayer: true,
+			url: "//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+			// url: "//{s}tilecart.kosmosnimki.ru/kosmo/{z}/{x}/{y}.png",
+			visibility: true,
+		});
+
+		let geoTiff = new GeoTiff("B_RGB.tif", {
+			minZoom: 0,
+			maxZoom: 10,
+			src: "/tests/B_RGB.tif",
+			corners: [[-134.7904382939764, 55.07955352950936], [-54.984314759410594, 54.98843914299802], [-55.041854075913825, 19.820153025849297], [-134.89882012831265, 19.631495126944017]],
+			visibility: true,
+			isBaseLayer: false,
+			attribution: 'USA precipitation 08.05.2016, nasasearch.nasa.gov',
+			opacity: 0.7
+		});
+
+		const globus = new Globe({
+			target: "globus", // a HTMLDivElement which its id is
+			name: "Earth",
+			atmosphereEnabled: false,
+			layers: [osm, geoTiff],
+			viewExtent: [ -180, -90, 180, 90.0]
+		});
+
+
+    </script>
+  </body>
+</html>

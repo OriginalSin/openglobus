@@ -8,6 +8,7 @@
   "main": "./lib/js/index.js",
   "style": "./css/og.css",
   "scripts": {
+    "dev_vite": "vite",
     "docs": "jsdoc -r ./src/ -c ./jsdoc.conf.json -d ./docs",
     "serve": "ws -p 8080",
     "build": "rollup -c --bundleConfigAsCjs",
@@ -70,5 +71,10 @@
     "webgl",
     "globe",
     "og"
-  ]
+  ],
+  "dependencies": {
+    "geotiff-geokeys-to-proj4": "^2022.9.7",
+    "proj4": "^2.9.2",
+    "vite": "^4.5.0"
+  }
 }
